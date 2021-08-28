@@ -1,0 +1,41 @@
+.section-registerRisk {
+    background-color: $colour-grey-light-1;
+    padding: 5rem 0;
+}
+
+.riskMeta-box {
+    background-color: rgba($colour-white, .8);
+    font-size: 1.5rem;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($colour-black, .15);
+    transition: transform .3s;
+    height: 50rem;
+
+    &__icon {
+        font-size: 6rem;
+        margin-bottom: .5rem;
+        display: inline-block;
+        background-image: linear-gradient(
+            to right bottom, 
+            rgba($colour-primary-contrast, 0.8),
+            rgba($colour-primary-dark, 0.8));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+}
+
+.riskForm {
+    border: 1px solid $colour-grey-light-2;
+    padding: 1rem;
+    border-radius: 3px;
+
+    &__align {
+        text-align: left;
+        display: inherit;
+        width: 100%;
+    }
+}

@@ -1,0 +1,25 @@
+.section-auth {
+    background-color: $colour-grey-light-1;
+    padding: 5rem 0;
+    // background-image: linear-gradient(
+    //     to right bottom, 
+    //     rgba($colour-primary-contrast, 0.8),
+    //     rgba($colour-primary-dark, 0.8));
+}
+
+.auth {
+    background-image: linear-gradient(  105deg, 
+                                        rgba($colour-white, .9) 0%, 
+                                        rgba($colour-white, .9) 50%,
+                                        transparent 50%), 
+                                        url(/img/nat-10.jpg);
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($colour-black, .2);
+    height: 55rem;
+
+    &__form {
+        width: 50%;
+        padding: 6rem;
+    }
+}

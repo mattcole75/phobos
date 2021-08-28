@@ -1,0 +1,53 @@
+.risk {
+    background-color: $colour-white;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($colour-black, .2);
+    height: 5rem;
+}
+
+.risk-item {
+
+    font-size: $default-font-size;
+
+    & table {
+        width: 100%;
+    }
+      
+    & tr {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+      
+    & th {
+        padding: 1rem;
+    }
+    
+    & td {
+        padding: 1rem;
+        cursor: pointer;
+    }
+    
+    & th {
+        letter-spacing: 0.1em;
+        border-bottom: 2px solid $colour-grey-dark-1;
+        border-top: 1px solid $colour-grey-dark-1;
+        text-align: left;
+    }
+    
+    & tr:nth-child(even) {
+        background-color: $colour-grey-light-2;
+    }
+    
+    & tbody tr:hover {
+        background-color: rgba($colour-primary, .3);
+    }
+
+    &__cell {
+        padding-left: 10px;
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+        white-space: nowrap;
+    }
+}

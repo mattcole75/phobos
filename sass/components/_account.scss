@@ -1,0 +1,76 @@
+.section-account {
+    background-color: $colour-grey-light-1;
+    padding: 5rem 0;
+}
+
+.account {
+    background-image: linear-gradient(  
+        105deg, 
+        rgba($colour-white, .9) 0%, 
+        rgba($colour-white, .9) 55%,
+        transparent 55%), 
+        url(/img/nat-10.jpg);
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($colour-black, .2);
+    height: 60rem;
+
+    &__form {
+        width: 50%;
+        padding: 6rem;
+    }
+
+    &__view {
+        width: 100%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &__align {
+        display: inherit;
+        width: 75%;
+    }
+}
+
+.account-image {
+
+    &__shape {
+        width: 10rem;
+        height: 10rem;
+        background-color: $colour-grey-light-1;
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        position: relative;
+    }
+
+    &__img {
+        height: 100%;
+        transform: scale(1.4);
+        transition: all .5s;
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $colour-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+    }
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img {
+        transform: scale(1);
+        filter: blur(3px) brightness(70%);
+    }
+}

@@ -1,0 +1,54 @@
+.form {
+
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        font-size: $default-font-size;
+        font-family: inherit;
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($colour-white ,.8);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 100%;
+        display: block;
+        resize: none;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($colour-black , .1);
+            border-bottom: 3px solid $colour-primary;
+        }
+
+        &:focus:invalid {
+            border-bottom: 3px solid $colour-secondary-dark;
+        }
+
+        &::-webkit-input-placeholder {
+            color: $colour-grey-dark-2;
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-top: .7rem;
+        display: block;
+    }
+
+    &__info {
+        font-size: 2rem;
+        font-weight: 400;
+    }
+
+    &__align-right {
+        float: right;
+    }
+
+    &__invalid {
+        border-bottom: 3px solid $colour-secondary-dark !important;
+    }
+}

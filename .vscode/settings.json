@@ -1,0 +1,13 @@
+{
+    "eslint.alwaysShowStatus": true,
+    "emmet.preferences": {
+        "emmet.triggerExpansionOnTab": true
+    },
+    "emmet.excludeLanguages": [
+
+
+        "markdown"
+    ],
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.triggerExpansionOnTab": true
+}
