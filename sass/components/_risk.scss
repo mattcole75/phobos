@@ -1,8 +1,18 @@
 .risk {
-    background-color: $colour-white;
+    // background-color: $colour-white;
+    background-image: url(/img/nat-10.jpg);
     border-radius: 3px;
     box-shadow: 0 1.5rem 4rem rgba($colour-black, .2);
     height: 5rem;
+}
+
+.register-risk__header {
+    height: 7rem;
+    border-radius: 10rem;
+    background-color: rgba($colour-white, .4);
+    box-shadow: 0 1.5rem 4rem rgba($colour-black, .2);
+    margin-left: 10rem;
+    margin-right: 10rem;
 }
 
 .risk-item {

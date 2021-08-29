@@ -509,10 +509,18 @@ body {
   filter: blur(3px) brightness(70%); }
 
 .risk {
-  background-color: #fff;
+  background-image: url(/img/nat-10.jpg);
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
   height: 5rem; }
+
+.register-risk__header {
+  height: 7rem;
+  border-radius: 10rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  margin-left: 10rem;
+  margin-right: 10rem; }
 
 .risk-item {
   font-size: 1.6rem; }
@@ -778,11 +786,11 @@ body {
     padding: 6rem; }
 
 .section-risk {
-  background-color: #f7f7f7;
+  background-image: url(/img/nat-10.jpg);
   padding: 5rem 0; }
 
 .section-registerRisk {
-  background-color: #f7f7f7;
+  background-image: url(/img/nat-10.jpg);
   padding: 5rem 0; }
 
 .riskMeta-box {

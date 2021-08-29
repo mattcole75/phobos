@@ -52,19 +52,20 @@ const registerRisk = React.memo((props) => {
                             </h2>
                         </div>
 
-                        <div className="col-one-third">
+                        <div className="register-risk__header">
+
+                        </div>
+
+                        {/* <div className="col-one-third">
                             <div className="riskMeta-box">
                                 <i className="riskMeta-box__icon icon-basic-gunsight"></i>
                                 <h3 className="heading-tertiary u-margin-bottom-small">Key words and phrases</h3>
                                 <div className="riskForm">
                                     <KeyWordsPhrases saveRiskHandler={saveRiskHandler}/>
                                 </div>
-                                
-                                
                             </div>
                         </div>
 
-                    
                         <div className="col-one-third">
                             <div className="riskMeta-box">
                                 <i className="riskMeta-box__icon icon-basic-link"></i>
@@ -73,19 +74,18 @@ const registerRisk = React.memo((props) => {
                             </div>
                         </div>
                     
-
-                    
                         <div className="col-one-third">
                             <div className="riskMeta-box">
                                 <i className="riskMeta-box__icon icon-basic-server2"></i>
                                 <h3 className="heading-tertiary u-margin-bottom-small">Similar registered risks</h3>
                                 
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
         </section>
+
     );
 });
 
