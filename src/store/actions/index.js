@@ -20,6 +20,13 @@ export {
 } from './feedback';
 
 export {
+    intelliVerseSendRequest,
+    intelliVerseStateReset,
+    intelliVerseErrorReset,
+    intelliVerseRedirectPath
+} from './intelliVerse';
+
+export {
     riskSendRequest,
     riskStateReset,
     riskErrorReset,

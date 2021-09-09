@@ -91,3 +91,10 @@ export const updateObject = (oldObject, updatedProperties) => {
         ...updatedProperties
     };
 };
+
+export const filterArray = (toBeFilteredArray, referenceArray) => {
+    let filtered = toBeFilteredArray.filter((item) => {
+        return !referenceArray.includes(item); 
+    });
+    return filtered;
+};

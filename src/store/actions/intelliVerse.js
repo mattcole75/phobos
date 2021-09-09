@@ -2,18 +2,17 @@ import axios from '../../shared/axios';
 import * as actionType from './actionTypes';
 import { whatIsTheErrorMessage } from '../../shared/errorMessages';
 
-
 // reducer interface function
 
 const start = () => {
     return {
-        type: actionType.FEEDBACK_START
+        type: actionType.INTELLIVERSE_START
     }
 };
 
 const success = (data, identifier) => {
     return {
-        type: actionType.FEEDBACK_SUCCESS,
+        type: actionType.INTELLIVERSE_SUCCESS,
         data: data,
         identifier: identifier
     }
@@ -21,32 +20,32 @@ const success = (data, identifier) => {
 
 const finish = () => {
     return {
-        type: actionType.FEEDBACK_FINISH
+        type: actionType.INTELLIVERSE_FINISH
     };
 };
 
 const fail = (error) => {
     return {
-        type: actionType.FEEDBACK_FAIL,
+        type: actionType.INTELLIVERSE_FAIL,
         error: error
     };
 };
 
 const stateReset = () => {
     return {
-        type: actionType.FEEDBACK_STATE_RESET
+        type: actionType.INTELLIVERSE_STATE_RESET
     };
 };
 
 const errorReset = () => {
     return {
-        type: actionType.FEEDBACK_ERROR_RESET
+        type: actionType.INTELLIVERSE_ERROR_RESET
     }
 };
 
 const setRedirectPath = (redirectPath) => {
     return {
-        type: actionType.FEEDBACK_REDIRECT_PATH,
+        type: actionType.INTELLIVERSE_REDIRECT_PATH,
         redirectPath: redirectPath
     };
 };
@@ -54,7 +53,7 @@ const setRedirectPath = (redirectPath) => {
 
 // export functions
 
-export const feedbackSendRequest = (url, method, data, idToken, identifier, param) => {
+export const intelliVerseSendRequest = (url, method, data, idToken, identifier, param, universe) => {
     return dispatch => {
         
         dispatch(start());
@@ -66,7 +65,8 @@ export const feedbackSendRequest = (url, method, data, idToken, identifier, para
             headers: {
                 'content-type': 'application/json',
                 idToken: idToken,
-                param: param
+                param: param,
+                universe: universe
             }
         })
         .then(response => {
@@ -79,19 +79,19 @@ export const feedbackSendRequest = (url, method, data, idToken, identifier, para
     };
 };
 
-export const feedbackStateReset = () => {
+export const intelliVerseStateReset = () => {
     return dispatch => {
         dispatch(stateReset());
     };
 };
 
-export const feedbackErrorReset = () => {
+export const intelliVerseErrorReset = () => {
     return dispatch => {
         dispatch(errorReset());
     };
 };
 
-export const feedbackRedirectPath = (redirectPath) => {
+export const intelliVerseRedirectPath = (redirectPath) => {
     return dispatch => {
         dispatch(setRedirectPath(redirectPath()));
     };

@@ -9,7 +9,7 @@
         font-family: inherit;
         color: inherit;
         padding: 1.5rem 2rem;
-        border-radius: 2px;
+        border-radius: $border-radius-default;
         background-color: rgba($colour-white ,.8);
         border: none;
         border-bottom: 3px solid transparent;
@@ -33,6 +33,7 @@
     }
 
     &__label {
+        color: rgba($colour-black, .8);
         font-size: 1.2rem;
         font-weight: 700;
         margin-top: .7rem;

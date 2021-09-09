@@ -1,86 +1,115 @@
-import React, {useCallback, useState} from 'react';
-import KeyWordsPhrases from './form/keyWordsPhrases';
-import {useDispatch, useSelector} from 'react-redux';
-import * as action from '../../../store/actions/index';
-import ErrorModal from '../../ui/errorModal/errorModal';
-import Backdrop from '../../ui/backdrop/backdrop';
-import Spinner from '../../ui/spinner/spinner';
+import React, {useCallback, useEffect, useState} from 'react';
+import LocationHeader from './location/locationHeader';
+import LocationSelector from './location/locationSelector';
+import KeyWordsPhrasesHeader from './keyWordsPhrases/keyWordsPhrasesHeader';
+import KeyWordsPhrasesSelector from './keyWordsPhrases/keyWordPhraseSelector';
+import LikelihoodImpactHeader from './likelihoodImpact/likelihoodImpactHeader';
+import useKeyWordsPhrases from '../../../hooks/useKeyWordsPhrases';
+import useLocations from '../../../hooks/useLocations';
+import {useSelector} from 'react-redux';
+// import * as action from '../../../store/actions/index';
+// import ErrorModal from '../../ui/errorModal/errorModal';
+// import Spinner from '../../ui/spinner/spinner';
 
 
 const registerRisk = React.memo((props) => {
 
-    const loading = useSelector(state => state.risk.loading);
-    const error = useSelector(state => state.risk.error);
-    const identifier = useSelector(state => state.risk.identifier);
-    const riskData = useSelector(state => state.risk.data);
+    // const loading = useSelector(state => state.risk.loading);
+    // const error = useSelector(state => state.risk.error);
+    // const identifier = useSelector(state => state.risk.identifier);
+    // const riskData = useSelector(state => state.risk.data);
 
-    const displayName = useSelector(state => state.auth.displayName)
-    const userId = useSelector(state => state.auth.localId);
-    const idToken = useSelector(state => state.auth.idToken);
-    const isAuthenticated = useSelector(state => state.auth.idToken !== null);
+    // const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    const onPostRisk = useCallback((riskData, identifier) => dispatch(action.riskSendRequest('/risk.json?auth=' + idToken,'POST', riskData, null, identifier, null)),[dispatch, idToken]);
-    const onSetRisk = useCallback((riskData, identifier) => dispatch(action.riskSendRequest('/risk.json?auth=' + idToken,'SET', riskData, null, identifier, null)), [dispatch, idToken]);
-
+    //const onPostRisk = useCallback((riskData, identifier) => dispatch(action.riskSendRequest('/risk.json?auth=' + idToken,'POST', riskData, null, identifier, null)),[dispatch, idToken]);
+    //const onSetRisk = useCallback((riskData, identifier) => dispatch(action.riskSendRequest('/risk.json?auth=' + idToken,'SET', riskData, null, identifier, null)), [dispatch, idToken]);
     
+    const {keyWordsPhrases, suggestKeyWordsPhrases, addKeyWordPhrase, removeKeyWordPhrase, setSuggestKeyWordsPhrases} = useKeyWordsPhrases();
+    const {locations, suggestLocations, addLocation, removeLocation, setSuggestLocation} = useLocations();
 
-    const saveRiskHandler = useCallback((keyWordPhrase) => {
+    const intelliVerse = useSelector(state => state.intelliVerse.data);
+    const identifier = useSelector(state => state.intelliVerse.identifier);
 
-        const data = {
-            userId: userId,
-            title: displayName,
-            keyWordPhrase: keyWordPhrase
+    const [wordPhraseSearchText, setWordPhraseSearchText] = useState('');
+    const [locationSearchText, setLocationSearchText] = useState('');
+
+    const wordPhraseSearchTextHandler = useCallback((wordPhrase) => {
+        setWordPhraseSearchText(wordPhrase);
+    }, []);
+
+    const locationTextHandler = useCallback((wordPhrase) => {
+        setLocationSearchText(wordPhrase);
+    }, []);
+
+    const addKeyWordPhraseHandler = useCallback((wordPhrase) => {
+        addKeyWordPhrase(wordPhrase);
+        setWordPhraseSearchText('');
+    }, [addKeyWordPhrase]);
+
+    const removeKeyWordPhraseHandler = useCallback((wordPhrase) => {
+        removeKeyWordPhrase(wordPhrase);
+    }, [removeKeyWordPhrase]);
+
+    const addLocationHandler = useCallback((location) => {
+        addLocation(location);
+        setLocationSearchText('');
+    }, [addLocation]);
+
+    const removeLocationHandler = useCallback((location) => {
+        removeLocation(location);
+    }, [removeLocation]);
+
+    useEffect(() => {
+        if(intelliVerse && identifier === 'GET_RECOMMENDED_KEY_WORDS_PHRASES'){
+            setSuggestKeyWordsPhrases([...intelliVerse.intelliSuggest]);
         }
 
-        if(riskData)
-            onSetRisk(data, 'SET_RISK');
-        else
-            onPostRisk(data, 'POST_RISK');
-    }, [userId, displayName, riskData, onSetRisk, onPostRisk]);
+        if(intelliVerse && identifier === 'GET_RECOMMENDED_LOCATIONS'){
+            setSuggestLocation([...intelliVerse.intelliSuggest]);
+        }
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[intelliVerse, keyWordsPhrases, identifier]);
         
     return (
 
         <section className="section-registerRisk">
-            <div className="row">
-                <div className="registerRisk">
-                    <div className="register__form">
-                        <div className="u-margin-bottom-medium u-centre-text">
-                            <h2 className="heading-secondary">
-                                Register a risk
-                            </h2>
-                        </div>
+            <div className="u-margin-bottom-medium u-centre-text">
+                <h2 className="heading-secondary">
+                    Raising a risk?
+                </h2>
+            </div>
 
-                        <div className="register-risk__header">
+            <div className="row register-risk">
 
-                        </div>
+                <div className="col-one-third register-risk__gutter--override">
+                    <div className="register-risk__header">
+                        <LocationHeader locationTextHandler={locationTextHandler}/>
+                        <LocationSelector
+                            locationSearchText={locationSearchText}
+                            locations={locations}
+                            suggestLocations={suggestLocations} 
+                            addLocationHandler={addLocationHandler}
+                            removeLocationHandler={removeLocationHandler} 
+                            />
+                    </div>
+                </div>
 
-                        {/* <div className="col-one-third">
-                            <div className="riskMeta-box">
-                                <i className="riskMeta-box__icon icon-basic-gunsight"></i>
-                                <h3 className="heading-tertiary u-margin-bottom-small">Key words and phrases</h3>
-                                <div className="riskForm">
-                                    <KeyWordsPhrases saveRiskHandler={saveRiskHandler}/>
-                                </div>
-                            </div>
-                        </div>
+                <div className="col-one-third register-risk__gutter--override">
+                    <div className="register-risk__header">
+                        <KeyWordsPhrasesHeader wordPhraseSearchTextHandler={wordPhraseSearchTextHandler} />
+                        <KeyWordsPhrasesSelector
+                            wordPhraseSearchText={wordPhraseSearchText}
+                            keyWordsPhrases={keyWordsPhrases}
+                            suggestKeyWordsPhrases={suggestKeyWordsPhrases} 
+                            addKeyWordPhraseHandler={addKeyWordPhraseHandler}
+                            removeKeyWordPhraseHandler={removeKeyWordPhraseHandler} />
+                    </div>
+                </div>
 
-                        <div className="col-one-third">
-                            <div className="riskMeta-box">
-                                <i className="riskMeta-box__icon icon-basic-link"></i>
-                                <h3 className="heading-tertiary u-margin-bottom-small">Suggested key words and phrases</h3>
-                                
-                            </div>
-                        </div>
-                    
-                        <div className="col-one-third">
-                            <div className="riskMeta-box">
-                                <i className="riskMeta-box__icon icon-basic-server2"></i>
-                                <h3 className="heading-tertiary u-margin-bottom-small">Similar registered risks</h3>
-                                
-                            </div>
-                        </div> */}
+                <div className="col-one-third register-risk__gutter--override">
+                    <div className="register-risk__header">
+                        <LikelihoodImpactHeader />
                     </div>
                 </div>
             </div>

@@ -17,11 +17,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start & node-sass sass/main.scss public/css/styles.css -w",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "compile:sass": "node-sass sass/main.scss public/css/styles.css -w"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

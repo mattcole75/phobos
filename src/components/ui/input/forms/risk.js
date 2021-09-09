@@ -1,26 +1,12 @@
 export const keyWordsAndPhrasesForm = {
     controls: {
-        keyWordPhraseLabel: {
-            elementType: 'label',
-            elementConfig: {
-                type: 'label',
-                htmlFor: 'keyWordPhrase'
-            },
-            value: 'Key word or phrase',
-            validation: {
-                required: false
-            },
-            visible: true,
-            valid: true,
-            touched: true
-        },
         keyWordPhrase: {
             elementType: 'input',
             elementConfig: {
                 id: 'keyWordPhrase',
                 type: 'text',
                 spellCheck: 'true',
-                placeholder: 'Enter a key word or phrase'
+                placeholder: 'What\'s on your mind?'
             },
             value: '',
             validation: {
@@ -31,17 +17,6 @@ export const keyWordsAndPhrasesForm = {
             visible: true,
             valid: false,
             touched: false
-        },
-        submitButton: {
-            elementType: 'button',
-            elementConfig: {
-                id: 'submit',
-                type: 'button'
-            },
-            value: 'Add',
-            visable: true,
-            valid: true,
-            touched: true
         }
     },
     formIsValid: false

@@ -66,6 +66,13 @@
         text-decoration: none;
      }
 
+     &--circle {
+         border: 1px solid rgba($colour-black,0.3);
+         width: 3.5rem;
+         border-radius: 5rem;
+         text-align: center;
+     }
+
     &::after {
         content: "";
         display: inline-block;
@@ -87,8 +94,6 @@
     }
 
     &:disabled {
-        // border: 1px solid #999999;
-        // background-color: #cccccc;
         cursor: not-allowed;
         color: $colour-grey-dark-1;
     }

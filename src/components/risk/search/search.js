@@ -1,7 +1,9 @@
 import React, {useRef, useState, useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import * as action from '../../../store/actions/index';
-import ErrorModal from '../../ui/errorModal/errorModal';
+
+import Messages from '../../ui/message/message';
+// import ErrorModal from '../../ui/errorModal/errorModal';
 // import Backdrop from '../../ui/backdrop/backdrop';
 import Spinner from '../../ui/spinner/spinner';
 
@@ -60,7 +62,7 @@ const search = React.memo((props) => {
 
     return (
         <div className="risk">
-          {error && <ErrorModal onClose={onClearError}>{error}</ErrorModal>}
+          {error && <Messages close={onClearError}>{error}</Messages>}
           {loading && <Spinner />}
           
             <div className="">                

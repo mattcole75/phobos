@@ -11,12 +11,14 @@ import App from './App';
 import authReducer from './store/reducers/auth';
 import feedbackReducer from './store/reducers/feedback';
 import riskReducer from './store/reducers/risk';
+import intelliVerse from './store/reducers/intelliVerse';
 
 const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 const rootReducer = combineReducers({
     auth: authReducer,
     feedback: feedbackReducer,
-    risk: riskReducer
+    risk: riskReducer,
+    intelliVerse: intelliVerse
 });
 
 const store = createStore(rootReducer, 

@@ -250,6 +250,11 @@ body {
   .btn--upper {
     text-transform: uppercase;
     text-decoration: none; }
+  .btn--circle {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    width: 3.5rem;
+    border-radius: 5rem;
+    text-align: center; }
   .btn::after {
     content: "";
     display: inline-block;
@@ -408,6 +413,7 @@ body {
     color: #999; }
 
 .form__label {
+  color: rgba(0, 0, 0, 0.8);
   font-size: 1.2rem;
   font-weight: 700;
   margin-top: .7rem;
@@ -508,19 +514,110 @@ body {
   transform: scale(1);
   filter: blur(3px) brightness(70%); }
 
-.risk {
-  background-image: url(/img/nat-10.jpg);
-  border-radius: 3px;
-  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
-  height: 5rem; }
-
 .register-risk__header {
-  height: 7rem;
-  border-radius: 10rem;
-  background-color: rgba(255, 255, 255, 0.4);
+  display: inline-block;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 2px;
+  width: 100%;
+  height: 10rem; }
+
+.register-risk__header-item {
+  width: 100%;
+  height: 100%;
+  padding: 1rem; }
+
+.register-risk__form {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 2px;
+  float: left; }
+
+.register-risk ul {
+  list-style-type: none; }
+
+.register-risk__header-bar {
+  height: 9rem;
+  border-radius: 2px;
+  background-color: #eeeeee;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
   margin-left: 10rem;
   margin-right: 10rem; }
+
+.register-risk__header-bar--item {
+  display: block;
+  background-color: rgba(238, 238, 238, 0.4);
+  height: 9rem;
+  border-radius: 2px;
+  float: left;
+  width: calc((100% - 2px) / 3);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: pointer; }
+
+.register-risk__header-bar--item:hover {
+  background-color: white;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4); }
+  .register-risk__header-bar--item:hover::after {
+    transform: scale(1.1);
+    opacity: 0; }
+
+.register-risk__header-bar--item-divider {
+  height: 40%;
+  float: left;
+  margin-top: 3rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.2); }
+
+.register-risk__header-bar--item-selected {
+  background-color: white;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4); }
+
+.register-risk__header-bar--item-paragraph {
+  padding: 1.5rem 0; }
+
+.register-risk__header-bar--item-container {
+  display: flex; }
+
+.register-risk__header-bar--item-button {
+  height: 95%;
+  border: none;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  box-shadow: none;
+  padding: 1rem; }
+
+.register-risk__form-item {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 2px;
+  float: left;
+  width: calc(100% / 3); }
+
+.register-risk__form-item--placeholder {
+  height: 1px;
+  float: left;
+  width: calc((100% - 2px) / 3); }
+
+.register-risk__list-container {
+  display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 1rem;
+  width: 100%; }
+
+.register-risk__list-container:hover {
+  background-color: rgba(85, 197, 122, 0.2); }
+
+.register-risk__list-item {
+  width: 100%;
+  align-self: center;
+  word-break: break-all; }
+
+.register-risk__list-item--button {
+  padding: 5px; }
 
 .risk-item {
   font-size: 1.6rem; }
@@ -625,6 +722,15 @@ body {
   .alert-btn--alert-danger {
     color: #a94442; }
 
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: transparent; }
+
 .row {
   max-width: 114rem;
   margin: 0 auto; }
@@ -637,19 +743,19 @@ body {
   .row [class^="col-"] {
     float: left; }
     .row [class^="col-"]:not(:last-child) {
-      margin-right: 6rem; }
+      margin-right: 3rem; }
   .row .col-half {
-    width: calc((100% - 6rem) / 2); }
+    width: calc((100% - 3rem) / 2); }
   .row .col-one-third {
-    width: calc((100% - 2 * 6rem) / 3); }
+    width: calc((100% - 2 * 3rem) / 3); }
   .row .col-two-thirds {
-    width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+    width: calc(2 * ((100% - 2 * 3rem) / 3) + 3rem); }
   .row .col-one-quarter {
-    width: calc((100% - 3 * 6rem) / 4); }
+    width: calc((100% - 3 * 3rem) / 4); }
   .row .col-two-quarter {
-    width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem); }
+    width: calc(2 * ((100% - 3 * 3rem) / 4) + 3rem); }
   .row .col-three-quarter {
-    width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
+    width: calc(3 * ((100% - 3 * 3rem) / 4) + 2 * 3rem); }
 
 .navigation__checkbox {
   display: none; }
@@ -790,35 +896,9 @@ body {
   padding: 5rem 0; }
 
 .section-registerRisk {
-  background-image: url(/img/nat-10.jpg);
-  padding: 5rem 0; }
-
-.riskMeta-box {
-  background-color: rgba(255, 255, 255, 0.8);
-  font-size: 1.5rem;
-  padding: 2.5rem;
-  text-align: center;
-  border-radius: 3px;
-  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
-  transition: transform .3s;
-  height: 50rem; }
-  .riskMeta-box__icon {
-    font-size: 6rem;
-    margin-bottom: .5rem;
-    display: inline-block;
-    background-image: linear-gradient(to right bottom, rgba(14, 81, 136, 0.8), rgba(40, 180, 133, 0.8));
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent; }
-
-.riskForm {
-  border: 1px solid #eee;
-  padding: 1rem;
-  border-radius: 3px; }
-  .riskForm__align {
-    text-align: left;
-    display: inherit;
-    width: 100%; }
+  background-image: url(/img/hero.jpg);
+  padding: 5rem 0;
+  height: 80rem; }
 
 .section-companyDetails {
   background-color: #f7f7f7;
