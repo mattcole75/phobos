@@ -12,13 +12,17 @@ import authReducer from './store/reducers/auth';
 import feedbackReducer from './store/reducers/feedback';
 import riskReducer from './store/reducers/risk';
 import intelliVerse from './store/reducers/intelliVerse';
+import organisation from './store/reducers/organisation';
+import location from './store/reducers/location';
 
 const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 const rootReducer = combineReducers({
     auth: authReducer,
     feedback: feedbackReducer,
     risk: riskReducer,
-    intelliVerse: intelliVerse
+    intelliVerse: intelliVerse,
+    organisation: organisation,
+    location: location
 });
 
 const store = createStore(rootReducer, 

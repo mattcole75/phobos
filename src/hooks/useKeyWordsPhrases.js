@@ -1,5 +1,5 @@
 import {useReducer, useCallback} from 'react';
-import {updateObject, filterArray} from '../shared/utility';
+import {updateObject, filterIntelliverseArray} from '../shared/utility';
 
 const initialState = {
     keyWordsPhrases: [],
@@ -41,7 +41,7 @@ const useKeyWordsPhrases = () => {
         dispatch({
             type: 'ADD_WORD_PHRASE',
             keyWordsPhrases: wordsPhrases,
-            suggestKeyWordsPhrases: filterArray(state.unfilteredSuggestKeyWordsPhrases, wordsPhrases)
+            suggestKeyWordsPhrases: filterIntelliverseArray(state.unfilteredSuggestKeyWordsPhrases, wordsPhrases)
         });
     },[state.keyWordsPhrases, state.unfilteredSuggestKeyWordsPhrases]);
 
@@ -49,8 +49,8 @@ const useKeyWordsPhrases = () => {
 
         dispatch({
             type: 'REMOVE_WORD_PHRASE',
-            keyWordsPhrases: filterArray(state.keyWordsPhrases, [item]),
-            suggestKeyWordsPhrases: filterArray(state.unfilteredSuggestKeyWordsPhrases, filterArray(state.keyWordsPhrases, [item]))
+            keyWordsPhrases: filterIntelliverseArray(state.keyWordsPhrases, [item]),
+            suggestKeyWordsPhrases: filterIntelliverseArray(state.unfilteredSuggestKeyWordsPhrases, filterIntelliverseArray(state.keyWordsPhrases, [item]))
         });
     }, [state.keyWordsPhrases, state.unfilteredSuggestKeyWordsPhrases]);
 
@@ -58,7 +58,7 @@ const useKeyWordsPhrases = () => {
         dispatch({
             type: 'FILTER_INTILLIVERSE_SUGGEST',
             unfilteredSuggestKeyWordsPhrases: intelliVerseSuggest,
-            suggestKeyWordsPhrases: filterArray(intelliVerseSuggest, state.keyWordsPhrases)
+            suggestKeyWordsPhrases: filterIntelliverseArray(intelliVerseSuggest, state.keyWordsPhrases)
         });
     }, [state.keyWordsPhrases]);
 

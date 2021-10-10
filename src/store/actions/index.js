@@ -32,3 +32,17 @@ export {
     riskErrorReset,
     riskRedirectPath
 } from './risk';
+
+export {
+    organisationSendRequest,
+    organisationStateReset,
+    organisationErrorReset,
+    organisationRedirectPath
+} from './organisation';
+
+export {
+    locationSendRequest,
+    locationStateReset,
+    locationErrorReset,
+    locationRedirectPath
+} from './location';

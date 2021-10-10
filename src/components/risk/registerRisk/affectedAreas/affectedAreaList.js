@@ -1,17 +1,17 @@
 import React from 'react';
 
-const locationSuggest = (props) => {
+const areaList = (props) => {
 
-    const {location, addLocationHandler} = props;
+    const {area, addAreaHandler} = props;
 
     const submitHandler = () => {
-        addLocationHandler(location);
+        addAreaHandler(area);
     }
 
     return (
         <div className="register-risk__list-container">
             <div className="register-risk__list-item">
-                <p className="paragraph">{location.name}</p>
+                <p className="paragraph">{area.name}</p>
             </div>
             <div>
                 <button className="btn register-risk__list-item--button"
@@ -21,4 +21,4 @@ const locationSuggest = (props) => {
     )
 }
 
-export default locationSuggest;
+export default areaList;

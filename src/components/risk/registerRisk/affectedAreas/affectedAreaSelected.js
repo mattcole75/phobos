@@ -1,17 +1,17 @@
 import React from 'react';
 
-const locationSelected = (props) => {
+const areaSelected = (props) => {
 
-    const {location, removeLocationHandler} = props;
+    const {area, removeAreaHandler} = props;
 
     const submitHandler = () => {
-        removeLocationHandler(location);
+        removeAreaHandler(area);
     }
 
     return (
         <div className="register-risk__list-container">
             <div className="register-risk__list-item">
-                <p className="paragraph">{location.name}</p>
+                <p className="paragraph">{area.name}</p>
             </div>
             <div>
                 <button className="btn btn--orange register-risk__list-item--button"
@@ -22,4 +22,4 @@ const locationSelected = (props) => {
 
 }
 
-export default locationSelected;
+export default areaSelected;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { defaultAvatarUrl } from '../../../../config/defaults';
+import { defaultAvatarUrl } from '../../../../configuration/defaults';
 
 const avatarImage = (props) => (
 

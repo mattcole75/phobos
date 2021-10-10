@@ -83,18 +83,39 @@ export const hashPassword = (string) => {
 };
 
 export const updateObject = (oldObject, updatedProperties) => {
-    // console.log('prev', oldObject);
-    // console.log('new', updatedProperties);
-    // console.log('updated', {...oldObject, ...updatedProperties})
     return {
         ...oldObject,
         ...updatedProperties
     };
 };
 
-export const filterArray = (toBeFilteredArray, referenceArray) => {
-    let filtered = toBeFilteredArray.filter((item) => {
-        return !referenceArray.includes(item); 
+export const filterIntelliverseArray = (toBeFilteredArray, referenceArray) => {
+
+    // commented out because if the toBeFiltered Array changes the includes does not find them resulting in an unfiltered array
+    // let filtered = toBeFilteredArray.filter((item) => {
+    //     return !referenceArray.includes(item);
+    // });
+
+    // return filtered;
+
+    let removeElements = [];
+    referenceArray.forEach(element => {
+        removeElements.push(element.result);
     });
-    return filtered;
+
+    return toBeFilteredArray.filter(item =>
+        removeElements.indexOf(item.result) === -1
+    )
+};
+
+export const filterArray = (toBeFilteredArray, referenceArray) => {
+
+    let removeElements = [];
+    referenceArray.forEach(element => {
+        removeElements.push(element.name);
+    });
+
+    return toBeFilteredArray.filter(item =>
+        removeElements.indexOf(item.name) === -1
+    )
 };

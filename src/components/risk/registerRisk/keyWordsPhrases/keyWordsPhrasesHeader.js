@@ -35,7 +35,7 @@ const keyWordsAndPhrasesHeader = React.memo((props) => {
       }, [enteredWordPhrase, getIntelliVerseRecommendations, idToken, inputRef, stateReset, wordPhraseSearchTextHandler]);
 
     return (
-        <div className="register-risk__header-item">
+        <div className="register-risk__panel-item">
             <label className="form__label">Key words and phrases</label>
             <input
                 className="form__input"

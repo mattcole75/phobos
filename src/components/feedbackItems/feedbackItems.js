@@ -6,7 +6,7 @@ import Backdrop from '../ui/backdrop/backdrop';
 import Spinner from '../ui/spinner/spinner';
 import FeedbackItem from '../../components/feedbackItems/feedbackItem/feedbackItem';
 import AddFeedbackItem from './addFeedbackItem/addFeedbackItem';
-import { defaultAvatarUrl } from '../../config/defaults';
+import { defaultAvatarUrl } from '../../configuration/defaults';
 import Messages from '../ui/message/message';
 
 const feedbackItems = React.memo((props) => {
