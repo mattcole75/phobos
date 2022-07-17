@@ -1,8 +1,10 @@
 // list of available auth actions
 export {
     login,
-    registerAccount,
-    updateAccount,
+    signup,
+    updateDisplayName,
+    updateEmail,
+    updatePassword,
     updateAvatar,
     deleteAvatar,
     passwordRequest,
@@ -28,6 +30,7 @@ export {
 
 export {
     riskSendRequest,
+    riskItemSelect,
     riskStateReset,
     riskErrorReset,
     riskRedirectPath

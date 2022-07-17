@@ -1,4 +1,4 @@
-import axios from '../../shared/axios';
+import axios from '../../axios/auth';
 import * as actionType from './actionTypes';
 import { whatIsTheErrorMessage } from '../../shared/errorMessages';
 

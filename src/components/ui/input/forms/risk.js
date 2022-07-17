@@ -99,6 +99,17 @@ export const riskRegisterTextForm = {
             visible: true,
             valid: false,
             touched: false
+        },
+        submitButton: {
+            elementType: 'button',
+            elementConfig: {
+                id: 'submit',
+                type: 'button'
+            },
+            value: 'Save',
+            visable: true,
+            valid: true,
+            touched: true
         }
     },
     formIsValid: false

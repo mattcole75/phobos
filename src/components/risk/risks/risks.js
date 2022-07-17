@@ -1,39 +1,35 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import RiskListItem from '../riskListItem/riskListItem';
+import * as action from '../../../store/actions/index';
 
-const risks = (props) => (
-    <div className="risk-item u-margin-bottom-big">
-        <div>
-            <div className="risk-item__cell">
-                <h2 className="heading-tertiary">
-                    Risk List
-                </h2>
-            </div>
-            <div className="risk-item__cell">
-                <button
-                    className="btn"
-                    type="button"
-                    onClick={props.onAddRisk}>Add new risk</button>
+const Risks = (props) => {
+
+    const { riskItems } = props;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const onSelectRiskItem = useCallback((item, identifier) => dispatch(action.riskItemSelect(item, identifier)),[dispatch]);
+
+    const navigateToRiskItem = () => {
+        navigate('/riskitem');
+    }
+
+    const selectRiskItem = (item) => {
+        onSelectRiskItem(item, 'SELECT_ITEM');
+        navigateToRiskItem();
+    }
+    
+    return (
+        <div className='container'>
+            <hr className='mb-3' />
+            <div className='row mb-2'>
+                {riskItems && riskItems.map((item, index) => (
+                    <RiskListItem key={index} item={item} select={selectRiskItem}/>
+                ))}
             </div>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Score</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.riskItems && props.riskItems.map(rsk => (
-                <tr key={rsk.id}>
-                    <td>{rsk.title}</td>
-                    <td>{rsk.score}</td>
-                    <td>{rsk.status}</td>
-                </tr>
-                ))}
-            </tbody>
-        </table>
-    </div>
-)
+    );
+}
 
-export default risks;
+export default Risks;

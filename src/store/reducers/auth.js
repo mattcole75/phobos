@@ -1,5 +1,4 @@
 import * as actionType from '../actions/actionTypes';
-import { updateObject } from '../../shared/utility';
 
 const initialState = {
     loading: false,
@@ -10,22 +9,24 @@ const initialState = {
     displayName: null,
     avatarUrl: null,
     identifier: null,
+    message: null,
     authRedirectPath: '/'
 };
 
 const authStateReset = (state) => {
-    return updateObject( state, initialState);
+    return { ...state, ...initialState };
 };
 
 const authStart = (state) => {
-    return updateObject( state, {
+    return { ...state,
         error: null,
+        message: null,
         loading: true
-    });
+    };
 };
 
 const authSuccess = (state, action) => {
-    return updateObject( state, {
+    return { ...state,
         loading: false,
         error: null,
         idToken: action.idToken,
@@ -34,86 +35,87 @@ const authSuccess = (state, action) => {
         displayName: action.displayName,
         avatarUrl: action.avatarUrl,
         identifier: action.identifier
-    });
+    };
 };
 
 const authFinish = (state) => {
-    return updateObject( state, {
+    return { ...state,
         identifier: null
-    });
+    };
 };
 
 const authFail = (state, action) => {
-    return updateObject( state, {
+    return { ...state,
         loading: false,
-        error: action.error
-    });
+        error: action.error,
+        message: null
+    };
 }
 
 const authErrorReset = (state) => {
-    return updateObject( state, {
+    return { ...state,
         error: null
-    })
+    };
 }
 
 const authRedirectPath = (state, action) => {
-    return updateObject( state, {
+    return { ...state,
         authRedirectPath: action.authRedirectPath
-    })
+    };
 };
 
 const patchAvatarUrl = (state, action) => {
-    return updateObject( state, {
+    return { ...state,
         loading: false,
         idToken: action.idToken,
         avatarUrl: action.avatarUrl,
         identifier: action.identifier
-    });
+    };
 };
 
 const deleteAvatarUrl = (state, action) => {
-    return updateObject( state, {
+    return { ...state,
         loading: false,
         idToken: action.idToken,
         avatarUrl: action.avatarUrl,
         identifier: action.identifier
-    });
+    };
 };
 
-const postDisplayName = (state, action) => {
-    return updateObject( state, {
+const patchDisplayName = (state, action) => {
+    return { ...state,
         loading: false,
-        idToken: action.idToken,
         displayName: action.displayName,
-        identifier: action.identifier
-    });
+        identifier: action.identifier,
+        message: action.message
+    };
 };
 
-const postEmail = (state, action) => {
-    return updateObject( state, {
+const patchEmail = (state, action) => {
+    return { ...state,
         loading: false,
-        idToken: action.idToken,
         email: action.email,
-        identifier: action.identifier
-    });
+        identifier: action.identifier,
+        message: action.message
+    };
 };
 
-const postPassword = (state, action) => {
-    return updateObject( state, {
+const patchPassword = (state, action) => {
+    return { ...state,
         loading: false,
-        idToken: action.idToken,
-        identifier: action.identifier
-    });
+        identifier: action.identifier,
+        message: action.message
+    };
 }
 
 const postForgottenPassword = (state, action) => {
-    return updateObject( state, {
+    return { ...state,
         email: action.email
-    });
+    };
 }
 
 const authLogout = (state) => {
-    return updateObject( state, initialState);
+    return { ...state, initialState };
 };
 
 const reducer = (state = initialState, action) => {
@@ -128,9 +130,9 @@ const reducer = (state = initialState, action) => {
         case actionType.AUTH_ERROR_RESET: return authErrorReset(state);
         case actionType.AUTH_PATCH_AVATAR_URL: return patchAvatarUrl(state, action);
         case actionType.AUTH_DELETE_AVATAR_URL: return deleteAvatarUrl(state, action);
-        case actionType.AUTH_POST_DISPLAY_NAME: return postDisplayName(state, action);
-        case actionType.AUTH_POST_EMAIL: return postEmail(state, action);
-        case actionType.AUTH_POST_PASSWORD: return postPassword(state, action);
+        case actionType.AUTH_PATCH_DISPLAY_NAME: return patchDisplayName(state, action);
+        case actionType.AUTH_PATCH_EMAIL: return patchEmail(state, action);
+        case actionType.AUTH_PATCH_PASSWORD: return patchPassword(state, action);
         case actionType.AUTH_POST_FORGOTTEN_PASSWORD: return postForgottenPassword(state, action);
         case actionType.AUTH_LOGOUT: return authLogout(state);
         

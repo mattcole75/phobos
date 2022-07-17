@@ -1,4 +1,5 @@
-import crypto from 'crypto';
+// import { digestStringAsync, CryptoDigestAlgorithm } from 'expo-crypto';
+import { stopWords } from '../configuration/defaults'; 
 
 export const checkValidity = ( value, rules ) => {
     let isValid = true;
@@ -74,20 +75,59 @@ export const updateCurrencyFormat = (currency) => {
     return c.toLocaleString('en-GB', {style: 'currency', currency: 'GBP'});
 };
 
-export const hashString = (string) => {
-    return crypto.createHash('sha1').update(string).digest('hex');
-};
+// export const hashString = (string) => {
+//     return crypto.createHash('sha1').update(string).digest('hex');
+// };
 
-export const hashPassword = (string) => {
-    return crypto.createHash('sha256').update(string).digest('hex');
-};
+// export const hashPassword = async (string) => { await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, string) };
+
+// const digest = await Crypto.digestStringAsync(
+//     Crypto.CryptoDigestAlgorithm.SHA256,
+//     'GitHub stars are neat 🌟'
+//   );
+
+// export const hashPassword = (string) => {
+//     return crypto.createHash('sha256').update(string).digest('hex');
+// };
+
+export const hashPassword = async (string) => {
+
+    const utf8 = new TextEncoder().encode(string);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((bytes) => bytes.toString(16).padStart(2, '0'))
+      .join('');
+    return hashHex;
+}
 
 export const updateObject = (oldObject, updatedProperties) => {
     return {
         ...oldObject,
         ...updatedProperties
     };
-};
+}
+
+export const getKeyWords = (phrase) => {
+    return new Promise(resolve => {
+
+        const removePuncuation = phrase.replace(/[^\w\s']|_/g, "").replace(/\s+/g, " ");
+        const wordArray = removePuncuation.match(/[^\s]+|\s+[^\s+]$/g);
+
+        const wordArrayLower = wordArray.map(ele => {
+            return ele.toLowerCase();
+        });
+
+        resolve(wordArrayLower.filter( x => !stopWords.includes(x) ));
+    
+    })
+}
+
+// const doSomethingAsync = () => {
+//     return new Promise(resolve => {
+//       setTimeout(() => resolve('I did something'), 3000)
+//     })
+// }
 
 export const filterIntelliverseArray = (toBeFilteredArray, referenceArray) => {
 

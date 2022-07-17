@@ -1,20 +1,23 @@
 import React from 'react';
-import logo from '../../../assets/images/logo-white.png';
+import Navigation from '../../navigation/navigationItems/navigationItems';
 
-const header = () => (
+const Header = (props) => (
 
-    <header className="header">
-
-        <div className="header__logo-box">
-            <img className="header__logo" src={logo} alt='real time risk management' />
-        </div>
-            <div className="header__title-box">
-                <h1 className="heading_primary">
-                    <span className="heading_primary--main">phobos</span>
-                    <span className="heading_primary--sub">real time risk management</span>
-                </h1>
+    <header>
+        <div className="px-3 py-2 bg-dark text-white">
+            <div className="container">
+                <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <h1 className="heading-primary">
+                            <span className="heading-primary_main">phobos</span>
+                            <span className="heading-primary_sub">real time risk management</span>
+                        </h1>
+                    </a>
+                    <Navigation isAuthenticated={props.isAuthenticated}/>
+                </div>
             </div>
+        </div>
     </header>
 );
 
-export default header;
+export default Header;

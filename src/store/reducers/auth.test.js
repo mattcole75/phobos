@@ -11,6 +11,7 @@ describe('auth reducer', () => {
             localId: null,
             email: null,
             displayName: null,
+            avatarUrl: null,
             identifier: null,
             authRedirectPath: '/'
         });
@@ -24,6 +25,7 @@ describe('auth reducer', () => {
             localId: 'test-local-id',
             email: 'test@test.com',
             displayName: 'test-display-name',
+            avatarUrl: 'https://pic.com/1',
             identifier: 'test-identifier',
             authRedirectPath: '/test'
         },{
@@ -35,6 +37,7 @@ describe('auth reducer', () => {
             localId: null,
             email: null,
             displayName: null,
+            avatarUrl: null,
             identifier: null,
             authRedirectPath: '/'
         });
@@ -175,6 +178,7 @@ describe('auth reducer', () => {
             localId: 'test-local-id',
             email: 'test@test.com',
             displayName: 'test-display-name',
+            avatarUrl: 'http://pic.com/1',
             identifier: 'test-identifier',
             authRedirectPath: '/test'
         },{
@@ -186,6 +190,7 @@ describe('auth reducer', () => {
             localId: null,
             email: null,
             displayName: null,
+            avatarUrl: null,
             identifier: null,
             authRedirectPath: '/'
         });
@@ -229,11 +234,12 @@ describe('auth reducer', () => {
         },{
             type: actionTypes.AUTH_POST_DISPLAY_NAME,
             displayName: 'updated-test-display_name',
+            idToken: 'update-test-token',
             identifier: 'CHANGE_DISPLAY_NAME'
         })).toEqual({
             loading: false,
             error: null,
-            idToken: 'test-token',
+            idToken: 'update-test-token',
             localId: 'test-local-id',
             email: 'test@test.com',
             displayName: 'updated-test-display_name',

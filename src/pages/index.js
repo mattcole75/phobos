@@ -1,7 +1,7 @@
 import React from 'react';
 import About from '../components/ui/about/about';
 import Features from '../components/ui/features/features';
-import Feedback from '../components/feedbackItems/feedbackItems';
+// import Feedback from '../components/feedbackItems/feedbackItems';
 
 const Index = () => {
 
@@ -11,7 +11,7 @@ const Index = () => {
 
 			<About />
 			<Features />
-			<Feedback limit={3}/>
+			{/* <Feedback limit={3}/> */}
 			
 		</section>
 

@@ -1,4 +1,4 @@
-import axios from '../../shared/axios';
+import axios from '../../axios/auth';
 import * as actionType from './actionTypes';
 import {whatIsTheErrorMessage} from '../../shared/errorMessages';
 
@@ -72,29 +72,29 @@ const authAvatarUrlDelete = (idToken, avatarUrl, identifier) => {
     };
 };
 
-const authDisplayNameUpdate = (idToken, displayName, identifier) => {
+const authDisplayNameUpdate = (displayName, identifier, message) => {
     return {
-        type: actionType.AUTH_POST_DISPLAY_NAME,
+        type: actionType.AUTH_PATCH_DISPLAY_NAME,
         displayName: displayName,
-        idToken: idToken,
-        identifier: identifier
+        identifier: identifier,
+        message: message
     };
 };
 
-const authEmailUpdate = (idToken, email, identifier) => {
+const authEmailUpdate = (email, identifier, message) => {
     return {
-        type: actionType.AUTH_POST_EMAIL,
+        type: actionType.AUTH_PATCH_EMAIL,
         email: email,
-        idToken: idToken,
-        identifier: identifier
+        identifier: identifier,
+        message: message
     };
 };
 
-const authPasswordUpdate = (idToken, identifier) => {
+const authPasswordUpdate = (identifier, message) => {
     return {
-        type: actionType.AUTH_POST_PASSWORD,
-        idToken: idToken,
-        identifier: identifier
+        type: actionType.AUTH_PATCH_PASSWORD,
+        identifier: identifier,
+        message: message
     };
 }
 
@@ -124,9 +124,32 @@ const setLocalStorage = (authData) => {
 // exported functions
 
 export const logout = () => {
+
+    const idToken = localStorage.getItem('idToken');
+    const localId = localStorage.getItem('localId');
+
     return dispatch => {
-        deleteLocalStorage();
-        dispatch(authStateReset());
+
+        if (idToken && localId) {
+
+            dispatch(authStart());
+
+            axios.post('/user/logout', {}, { 
+                headers: {
+                    'content-type': 'application/json',
+                    idToken: idToken,
+                    localId: localId
+                }
+            })
+            .then(res => {
+                deleteLocalStorage();
+                dispatch(authStateReset());
+                dispatch(authFinish());
+            })
+            .catch(err => {
+                dispatch(authFail(whatIsTheErrorMessage(err))); 
+            });
+        }
     };
 };
 
@@ -145,7 +168,7 @@ export const changeRedirectPath = (redirectPath) => {
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
-            dispatch(logout());
+            dispatch(logout({}));
         }, expirationTime * 1000);
     };
 };
@@ -166,7 +189,8 @@ export const login = (authData, identifier) => {
                     res.data.user.email, 
                     res.data.user.displayName,
                     res.data.user.avatarUrl,
-                    identifier));
+                    identifier
+                ));
 
                 dispatch(checkAuthTimeout(
                     res.data.user.expiresIn));
@@ -175,13 +199,12 @@ export const login = (authData, identifier) => {
 
             })
             .catch(err => {
-        
                 dispatch(authFail(whatIsTheErrorMessage(err))); 
             });
     };
 };
 
-export const registerAccount = (authData, identifier) => {
+export const signup = (authData, identifier) => {
     return dispatch => {
 
         dispatch(authStart());
@@ -189,15 +212,18 @@ export const registerAccount = (authData, identifier) => {
         axios.post('/user', authData)
             .then(res => {
                 
-                setLocalStorage(res.data);
+                setLocalStorage(res.data.user);
 
                 dispatch(authSuccess(
-                    null, // res.data.user.idToken, 
-                    null, // res.data.user.localId, 
-                    null, // res.data.user.email, 
-                    null, //res.data.user.displayName,
-                    null, // res.data.user.avatarUrl
-                    identifier));
+                    res.data.user.idToken, 
+                    res.data.user.localId, 
+                    res.data.user.email, 
+                    res.data.user.displayName,
+                    res.data.user.avatarUrl,
+                    identifier
+                ));
+
+                dispatch(checkAuthTimeout(res.data.user.expiresIn));
 
                 dispatch(authFinish());
             })
@@ -229,13 +255,96 @@ export const passwordRequest = (authData, identifier) => {
 
             })
             .catch(error => {
-
-                dispatch(authFail(whatIsTheErrorMessage(error))); 
+                dispatch(authFail(whatIsTheErrorMessage(error)));
             });
     };
 };
 
-export const updateAccount = (authData, idToken, identifier) => {
+export const updateDisplayName = (displayName, idToken, localId, identifier) => {
+    return dispatch => {
+
+        dispatch(authStart());
+
+        const config = { 
+            headers: {
+                'content-type': 'application/json',
+                idToken: idToken,
+                localId: localId
+            }
+        };
+
+        axios.patch('/user/displayname', { displayName: displayName }, config)
+            .then(res => {
+                    dispatch(authDisplayNameUpdate(
+                    displayName,
+                    identifier,
+                    'Display name successfully updated.'
+                ));
+                localStorage.setItem('displayName', displayName);
+
+                dispatch(authFinish());
+            })
+            .catch(err => {
+                dispatch(authFail(whatIsTheErrorMessage(err))); 
+            });
+    };
+};
+
+export const updateEmail = (email, idToken, localId, identifier) => {
+    return dispatch => {
+
+        dispatch(authStart());
+
+        const config = { 
+            headers: {
+                'content-type': 'application/json',
+                idToken: idToken,
+                localId: localId
+            }
+        };
+
+        axios.patch('/user/email', { email: email }, config)
+            .then(res => {
+                    dispatch(authEmailUpdate(
+                    email,
+                    identifier,
+                    'Email address successfully updated.'
+                ));
+                localStorage.setItem('email', email);
+
+                dispatch(authFinish());
+            })
+            .catch(err => {
+                dispatch(authFail(whatIsTheErrorMessage(err))); 
+            });
+    };
+};
+
+export const updatePassword = (password, idToken, localId, identifier) => {
+    return dispatch => {
+
+        dispatch(authStart());
+
+        const config = { 
+            headers: {
+                'content-type': 'application/json',
+                idToken: idToken,
+                localId: localId
+            }
+        };
+
+        axios.patch('/user/password', { password: password }, config)
+            .then(res => {
+                dispatch(authPasswordUpdate(identifier, 'Password successfully updated.'));
+                dispatch(authFinish());
+            })
+            .catch(err => {
+                dispatch(authFail(whatIsTheErrorMessage(err))); 
+            });
+    };
+};
+
+export const updateAccount = (authData, idToken, localId, identifier) => {
     return dispatch => {
 
         dispatch(authStart());
@@ -245,7 +354,8 @@ export const updateAccount = (authData, idToken, identifier) => {
         let config = { 
             headers: {
                 'content-type': 'application/json',
-                idToken: idToken
+                idToken: idToken,
+                localId: localId
             }
         };
 
@@ -376,11 +486,11 @@ export const authCheckState = () => {
         const avatarUrl = localStorage.getItem('avatarUrl');
 
         if (!idToken) {
-            dispatch(logout());
+            dispatch(logout({}));
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
             if (expirationDate <= new Date()){
-                dispatch(logout());
+                dispatch(logout({}));
                 dispatch(authStateReset());
             } else {
                 const localId = localStorage.getItem('localId');
