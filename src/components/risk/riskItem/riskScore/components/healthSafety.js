@@ -8,8 +8,8 @@ const HealthSafety = (props) => {
     const { riskItem, save } = props;
 
     const defaultValues = {
-        unmitigated: (riskItem.healthSafetyScore && riskItem.healthSafetyScore.unmitigated.score) || '',
-        mitigated: (riskItem.healthSafetyScore && riskItem.healthSafetyScore.mitigated.score) || ''    
+        unmitigated: (riskItem && riskItem.healthSafetyScore) ? riskItem.healthSafetyScore.unmitigated.score : '1',
+        mitigated: (riskItem && riskItem.healthSafetyScore) ?  riskItem.healthSafetyScore.mitigated.score : '1'    
     }
 
     const methods = useForm({
@@ -53,36 +53,43 @@ const HealthSafety = (props) => {
             <form className='h-100 p-4 bg-light border rounded-3' onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <h3 className='mb-2'>Health & Safety</h3>
-                    <div className='form-floating mb-3'>
-                        <select className='form-select' id='unmitigated' required
-                            disabled={false}
-                            {...register('unmitigated', { required: true })}>
-                            <option value=''>Choose...</option>
-                            <option value='1'>{riskLikelihoodImpactConfig.healthSafety[1].description}</option>
-                            <option value='2'>{riskLikelihoodImpactConfig.healthSafety[2].description}</option>
-                            <option value='3'>{riskLikelihoodImpactConfig.healthSafety[3].description}</option>
-                            <option value='4'>{riskLikelihoodImpactConfig.healthSafety[4].description}</option>
-                            <option value='5'>{riskLikelihoodImpactConfig.healthSafety[5].description}</option>
-                            <option value='6'>{riskLikelihoodImpactConfig.healthSafety[6].description}</option>
-                        </select>
-                        <label htmlFor='unmitigated'>Unmitigated Likelihood</label>
-                    </div>
-                    <div className='form-floating mb-3'>
-                        <select className='form-select' id='mitigated' required
-                            disabled={false}
-                            {...register('mitigated', { required: true })}>
-                            <option value=''>Choose...</option>
-                            <option value='1'>{riskLikelihoodImpactConfig.healthSafety[1].description}</option>
-                            <option value='2'>{riskLikelihoodImpactConfig.healthSafety[2].description}</option>
-                            <option value='3'>{riskLikelihoodImpactConfig.healthSafety[3].description}</option>
-                            <option value='4'>{riskLikelihoodImpactConfig.healthSafety[4].description}</option>
-                            <option value='5'>{riskLikelihoodImpactConfig.healthSafety[5].description}</option>
-                            <option value='6'>{riskLikelihoodImpactConfig.healthSafety[6].description}</option>
-                        </select>
-                        <label htmlFor='mitigated'>Mitigated Likelihood</label>
+                        <h6 htmlFor='mitigated'>Unmitigated Health & Safety</h6>
+                        <div className='form-floating mb-3 border-bottom'>
+                            <div className='range'>
+                                <input
+                                    type="range" 
+                                    { ...register('unmitigated')}
+                                    min={riskLikelihoodImpactConfig.healthSafety.min} 
+                                    max={riskLikelihoodImpactConfig.healthSafety.max}
+                                    step={riskLikelihoodImpactConfig.healthSafety.step}
+                                />
+                                <p>{(riskItem && riskItem.healthSafetyScore)
+                                        ? riskItem.healthSafetyScore.unmitigated.description
+                                        : riskLikelihoodImpactConfig.healthSafety[1].description}
+                                </p>
+                            </div>
+                        </div>
+                        <div className='form-floating mb-3'>
+
+                        <h6 htmlFor='mitigated'>Mitigated Health & Safety</h6>
+                        <div className='form-floating mb-3'>
+                            <div className='range'>
+                                <input
+                                    type="range" 
+                                    {...register('mitigated')}
+                                    min={riskLikelihoodImpactConfig.healthSafety.min} 
+                                    max={riskLikelihoodImpactConfig.healthSafety.max}
+                                    step={riskLikelihoodImpactConfig.healthSafety.step}
+                                    />
+                                <p>{(riskItem && riskItem.healthSafetyScore)
+                                        ? riskItem.healthSafetyScore.mitigated.description
+                                        : riskLikelihoodImpactConfig.healthSafety[1].description}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} />
+                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} delay={250} />
             </form>
         </FormProvider>
         

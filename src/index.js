@@ -9,11 +9,6 @@ import App from './App';
 import authReducer from './store/reducers/auth';
 import riskReducer from './store/reducers/risk';
 
-// import feedbackReducer from './store/reducers/feedback';
-// import intelliVerse from './store/reducers/intelliVerse';
-// import organisation from './store/reducers/organisation';
-// import location from './store/reducers/location';
-
 const store = configureStore({
     reducer: {
         auth: authReducer,

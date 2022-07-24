@@ -8,7 +8,7 @@ const Appetite = (props) => {
     const { riskItem, save } = props;
 
     const defaultValues = {
-        appetite: (riskItem.appetiteScore && riskItem.appetiteScore.score) || ''   
+        appetite: (riskItem && riskItem.appetiteScore) ? riskItem.appetiteScore.score : '1'   
     }
 
     const methods = useForm({
@@ -47,21 +47,21 @@ const Appetite = (props) => {
                 <div>
                     <h3 className='mb-2'>Risk Appetite</h3>
                     <div className='form-floating mb-3'>
-                        <select className='form-select' id='appetite' required
-                            disabled={false}
-                            {...register('appetite', { required: true })}>
-                            <option value=''>Choose...</option>
-                            <option value='1'>{riskLikelihoodImpactConfig.appetite[1].description}</option>
-                            <option value='2'>{riskLikelihoodImpactConfig.appetite[2].description}</option>
-                            <option value='3'>{riskLikelihoodImpactConfig.appetite[3].description}</option>
-                            <option value='4'>{riskLikelihoodImpactConfig.appetite[4].description}</option>
-                            <option value='5'>{riskLikelihoodImpactConfig.appetite[5].description}</option>
-                            <option value='6'>{riskLikelihoodImpactConfig.appetite[6].description}</option>
-                        </select>
-                        <label htmlFor='appetite'>Risk appetite</label>
+                    <div className='range'>
+                            <input
+                                type="range" 
+                                { ...register('appetite')}
+                                min={riskLikelihoodImpactConfig.appetite.min} 
+                                max={riskLikelihoodImpactConfig.appetite.max}
+                                step={riskLikelihoodImpactConfig.appetite.step}
+                                />
+                            <p>{(riskItem && riskItem.appetiteScore)
+                                    ? riskItem.appetiteScore.description 
+                                    : riskLikelihoodImpactConfig.appetite[1].description}</p>
+                        </div>
                     </div>
                 </div>
-                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} />
+                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} delay={250} />
             </form>
         </FormProvider>
         

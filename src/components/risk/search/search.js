@@ -67,6 +67,9 @@ const Search = React.memo((props) => {
                     complianceScore: risks[key].complianceScore,
                     objectivesScore: risks[key].objectivesScore,
                     publicityScore: risks[key].publicityScore,
+                    controlMeasureItems: risks[key].controlMeasureItems,
+                    potentialSourceItems: risks[key].potentialSourceItems,
+                    recoveryItems: risks[key].recoveryItems,
                     updated: risks[key].updated,
                     created: risks[key].created
                     // score: data[key].score,

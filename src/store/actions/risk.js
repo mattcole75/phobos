@@ -48,6 +48,30 @@ const select = (riskItem, identifier) => {
     };
 }
 
+const selectControlMeasureItemIndex = (index, identifier) => {
+    return {
+        type: actionType.RISK_CONTROL_MEASURE_ITEM_SELECT,
+        controlMeasureItemIndex: index,
+        identifier: identifier
+    };
+}
+
+const selectPotentialSourceItemIndex = (index, identifier) => {
+    return {
+        type: actionType.RISK_POTENTIAL_SOURCE_ITEM_SELECT,
+        potentialSourceItemIndex: index,
+        identifier: identifier
+    };
+}
+
+const selectRecoveryItemIndex = (index, identifier) => {
+    return {
+        type: actionType.RISK_RECOVERY_ITEM_SELECT,
+        recoveryItemIndex: index,
+        identifier: identifier
+    };
+}
+
 const fail = (error) => {
     return {
         type: actionType.RISK_FAIL,
@@ -84,7 +108,6 @@ export const riskItemSelect = (riskItem, identifier) => {
     };
 }
 
-
 export const riskSendRequest = (url, method, data, idToken, identifier, param) => {
 
     return dispatch => {
@@ -120,6 +143,30 @@ export const riskSendRequest = (url, method, data, idToken, identifier, param) =
     };
 
 };
+
+export const riskControlMeasureItemSelect = (index, identifier) => {
+    return dispatch => {
+        dispatch(start());
+        dispatch(selectControlMeasureItemIndex(index, identifier));
+        dispatch(finish());
+    };
+}
+
+export const riskPotencialSourceItemSelect = (index, identifier) => {
+    return dispatch => {
+        dispatch(start());
+        dispatch(selectPotentialSourceItemIndex(index, identifier));
+        dispatch(finish());
+    };
+}
+
+export const riskRecoveryItemSelect = (index, identifier) => {
+    return dispatch => {
+        dispatch(start());
+        dispatch(selectRecoveryItemIndex(index, identifier));
+        dispatch(finish());
+    };
+}
 
 // export const registerRisk = (data, idToken, identifier) => {
 

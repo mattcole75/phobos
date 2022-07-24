@@ -5,22 +5,22 @@ import MenuNavigationItem from './menuNavigationItem/menuNavigationItem';
 const navigationItems = (props) => (
 	<ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 		<NavigationItem link='/' icon='bi-house-door'>Home</NavigationItem>
-		{ props.isAuthenticated
+		{/* { props.isAuthenticated
 			? <NavigationItem link='/dashboard' icon='bi-speedometer2'>Dashboard</NavigationItem>
 			: null
-		}
+		} */}
 		{ props.isAuthenticated
 			? <NavigationItem link='/risk' icon='bi-exclamation-triangle'>Risk</NavigationItem>
 			: null
 		}
-		{ props.isAuthenticated
+		{/* { props.isAuthenticated
 			? <NavigationItem link='/opportunity' icon='bi-info-circle'>Opportunity</NavigationItem>
 			: null
-		}
-		{ props.isAuthenticated
+		} */}
+		{/* { props.isAuthenticated
 			? <NavigationItem link='/response' icon='bi-card-checklist'>Response</NavigationItem>
 			: null
-		}
+		} */}
 		<div  className='dropdown text-end'>
 			<a href="/" className="nav-link text-white dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 				<i className="bi-person fs-3 d-block text-sm-center"></i>

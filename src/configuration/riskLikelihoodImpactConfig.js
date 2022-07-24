@@ -5,7 +5,7 @@ export const riskLikelihoodImpactConfig = {
         min: 1,
         max: 6,
         step: 1,
-        unmitigated: 6,
+        unmitigated: 1,
         mitigated: 1,
         1: {
             title: 'Negligible',

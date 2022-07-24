@@ -5,6 +5,9 @@ const initialState = {
     error: null,
     risks: null,
     riskItem: null,
+    controlMeasureItemIndex: null,
+    potentialSourceItemIndex: null,
+    recoveryItemIndex: null,
     identifier: null,
     riskRedirectPath: '/risk'
 };
@@ -60,6 +63,27 @@ const riskSelect = (state, action) => {
     };
 }
 
+const selectControlMeasureItemIndex = (state, action) => {
+    return { ...state, 
+        controlMeasureItemIndex: action.controlMeasureItemIndex,
+        identifier: action.identifier
+    };
+}
+
+const selectPotentialSourceItemIndex = (state, action) => {
+    return { ...state, 
+        potentialSourceItemIndex: action.potentialSourceItemIndex,
+        identifier: action.identifier
+    };
+}
+
+const selectRecoveryItemIndex = (state, action) => {
+    return { ...state, 
+        recoveryItemIndex: action.recoveryItemIndex,
+        identifier: action.identifier
+    };
+}
+
 const riskFail = (state, action) => {
     return { ...state, 
         loading: false,
@@ -93,6 +117,9 @@ const reducer = (state = initialState, action) => {
         case actionType.RISK_PATCH_SUCCESS: return riskPatchSuccess(state, action);
         case actionType.RISK_GET_SUCCESS: return riskGetSuccess(state, action);
         case actionType.RISK_SELECT: return riskSelect(state, action);
+        case actionType.RISK_CONTROL_MEASURE_ITEM_SELECT: return selectControlMeasureItemIndex(state, action);
+        case actionType.RISK_POTENTIAL_SOURCE_ITEM_SELECT: return selectPotentialSourceItemIndex(state, action);
+        case actionType.RISK_RECOVERY_ITEM_SELECT: return selectRecoveryItemIndex(state, action);
         case actionType.RISK_FINISH: return riskFinish(state);
         case actionType.RISK_FAIL: return riskFail(state, action);
         case actionType.RISK_ERROR_RESET: return riskErrorReset(state);

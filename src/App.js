@@ -26,21 +26,6 @@ const Risk = React.lazy(() => {
 const RiskItem = React.lazy(() => {
 	return import('./pages/risk/riskItem');
 });
-// const Feedback = React.lazy(() => {
-// 	return import('./pages/feedback');
-// });
-// const Risk = React.lazy(() => {
-// 	return import('./pages/risk');
-// });
-// const RegisterRisk = React.lazy(() => {
-// 	return import('./pages/registerRisk');
-// });
-// const CompanyDetails = React.lazy(() => {
-// 	return import('./pages/companyDetails')
-// });
-// const ContactUs = React.lazy(() => {
-// 	return import('./pages/contactUs');
-// });
 
 const App = () => {
 
@@ -57,11 +42,6 @@ const App = () => {
 			<Route path="/" element={ <Index /> } />
 			<Route path="/login" element={ <Login /> } />
 			<Route path="/signup" element={ <Signup /> } />
-			{/* <Route exact path="/" component={Index} />
-			<Route path="/companyDetails" render={() => <CompanyDetails />} />
-			<Route path="/contactUs" render={() => <ContactUs />} />
-			<Route path="/feedback" render={() => <Feedback />} />
-			<Route path="/auth" render={() => <Auth />} /> */}
 		</Routes>
 	);
 
@@ -74,14 +54,6 @@ const App = () => {
 				<Route path="/account" element={ <Account /> } />
 				<Route path="/risk" element={ <Risk /> } />
 				<Route path="/riskitem" element={ <RiskItem /> } />
-				{/* <Route exact path="/" component={Index} />
-				<Route path="/auth" render={() => <Auth />} />
-				<Route path="/companyDetails" render={() => <CompanyDetails />} />
-				<Route path="/contactUs" render={() => <ContactUs />} />
-				<Route path="/account" render={() => <Account />} />
-				<Route path="/feedback" render={() => <Feedback />} />
-				<Route path="/risk" render={() => <Risk />} />
-				<Route path="/registerRisk" render={() => <RegisterRisk />} /> */}
 			</Routes>
 		)
 	}

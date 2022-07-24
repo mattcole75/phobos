@@ -8,8 +8,8 @@ const Projects = (props) => {
     const { riskItem, save } = props;
 
     const defaultValues = {
-        unmitigated: (riskItem.projectsScore && riskItem.projectsScore.unmitigated.score) || '',
-        mitigated: (riskItem.projectsScore && riskItem.projectsScore.mitigated.score) || ''    
+        unmitigated: (riskItem && riskItem.projectsScore) ? riskItem.projectsScore.unmitigated.score : '1',
+        mitigated: (riskItem && riskItem.projectsScore) ? riskItem.projectsScore.mitigated.score : '1'    
     }
 
     const methods = useForm({
@@ -53,36 +53,41 @@ const Projects = (props) => {
             <form className='h-100 p-4 bg-light border rounded-3' onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <h3 className='mb-2'>Projects</h3>
-                    <div className='form-floating mb-3'>
-                        <select className='form-select' id='unmitigated' required
-                            disabled={false}
-                            {...register('unmitigated', { required: true })}>
-                            <option value=''>Choose...</option>
-                            <option value='1'>{riskLikelihoodImpactConfig.project[1].description}</option>
-                            <option value='2'>{riskLikelihoodImpactConfig.project[2].description}</option>
-                            <option value='3'>{riskLikelihoodImpactConfig.project[3].description}</option>
-                            <option value='4'>{riskLikelihoodImpactConfig.project[4].description}</option>
-                            <option value='5'>{riskLikelihoodImpactConfig.project[5].description}</option>
-                            <option value='6'>{riskLikelihoodImpactConfig.project[6].description}</option>
-                        </select>
-                        <label htmlFor='unmitigated'>Unmitigated Likelihood</label>
+                    <h6 htmlFor='mitigated'>Unmitigated Project</h6>
+                    <div className='form-floating mb-3 border-bottom'>
+                        <div className='range'>
+                            <input
+                                type="range" 
+                                { ...register('unmitigated')}
+                                min={riskLikelihoodImpactConfig.project.min} 
+                                max={riskLikelihoodImpactConfig.project.max}
+                                step={riskLikelihoodImpactConfig.project.step}
+                            />
+                            <p>{(riskItem && riskItem.projectsScore)
+                                    ? riskItem.projectsScore.unmitigated.description
+                                    : riskLikelihoodImpactConfig.project[1].description}
+                            </p>
+                        </div>
                     </div>
+
+                    <h6 htmlFor='mitigated'>Mitigated Project</h6>
                     <div className='form-floating mb-3'>
-                        <select className='form-select' id='mitigated' required
-                            disabled={false}
-                            {...register('mitigated', { required: true })}>
-                            <option value=''>Choose...</option>
-                            <option value='1'>{riskLikelihoodImpactConfig.project[1].description}</option>
-                            <option value='2'>{riskLikelihoodImpactConfig.project[2].description}</option>
-                            <option value='3'>{riskLikelihoodImpactConfig.project[3].description}</option>
-                            <option value='4'>{riskLikelihoodImpactConfig.project[4].description}</option>
-                            <option value='5'>{riskLikelihoodImpactConfig.project[5].description}</option>
-                            <option value='6'>{riskLikelihoodImpactConfig.project[6].description}</option>
-                        </select>
-                        <label htmlFor='mitigated'>Mitigated Likelihood</label>
+                        <div className='range'>
+                            <input
+                                type="range" 
+                                {...register('mitigated')}
+                                min={riskLikelihoodImpactConfig.project.min} 
+                                max={riskLikelihoodImpactConfig.project.max}
+                                step={riskLikelihoodImpactConfig.project.step}
+                            />
+                            <p>{(riskItem && riskItem.projectsScore)
+                                    ? riskItem.projectsScore.mitigated.description
+                                    : riskLikelihoodImpactConfig.project[1].description}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} />
+                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} delay={250} />
             </form>
         </FormProvider>
         

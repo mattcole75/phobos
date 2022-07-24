@@ -5,7 +5,7 @@ import useDeepCompareEffect from "use-deep-compare-effect";
 
 const Autosave = memo(props => {
 
-    const { defaultValues, onSubmit } = props;
+    const { defaultValues, onSubmit, delay } = props;
 
     // a reference to all hook methods
     const methods = useFormContext();
@@ -16,7 +16,7 @@ const Autosave = memo(props => {
     const debouncedSave = useCallback(
         debounce(() => {
           methods.handleSubmit(onSubmit)();
-        }, 2000),
+        }, delay),
         []
       );
 

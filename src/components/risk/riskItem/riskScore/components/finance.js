@@ -8,8 +8,8 @@ const Finance = (props) => {
     const { riskItem, save } = props;
 
     const defaultValues = {
-        unmitigated: (riskItem.financeScore && riskItem.financeScore.unmitigated.score) || '',
-        mitigated: (riskItem.financeScore && riskItem.financeScore.mitigated.score) || ''    
+        unmitigated: (riskItem && riskItem.financeScore) ? riskItem.financeScore.unmitigated.score : '1',
+        mitigated: (riskItem && riskItem.financeScore) ?  riskItem.financeScore.mitigated.score : '1'    
     }
 
     const methods = useForm({
@@ -53,36 +53,40 @@ const Finance = (props) => {
             <form className='h-100 p-4 bg-light border rounded-3' onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <h3 className='mb-2'>Finance</h3>
-                    <div className='form-floating mb-3'>
-                        <select className='form-select' id='unmitigated' required
-                            disabled={false}
-                            {...register('unmitigated', { required: true })}>
-                            <option value=''>Choose...</option>
-                            <option value='1'>{riskLikelihoodImpactConfig.finance[1].description}</option>
-                            <option value='2'>{riskLikelihoodImpactConfig.finance[2].description}</option>
-                            <option value='3'>{riskLikelihoodImpactConfig.finance[3].description}</option>
-                            <option value='4'>{riskLikelihoodImpactConfig.finance[4].description}</option>
-                            <option value='5'>{riskLikelihoodImpactConfig.finance[5].description}</option>
-                            <option value='6'>{riskLikelihoodImpactConfig.finance[6].description}</option>
-                        </select>
-                        <label htmlFor='unmitigated'>Unmitigated Likelihood</label>
+                    <h6 htmlFor='mitigated'>Unmitigated Finance</h6>
+                    <div className='form-floating mb-3 border-bottom'>
+                        <div className='range'>
+                            <input
+                                type="range" 
+                                { ...register('unmitigated')}
+                                min={riskLikelihoodImpactConfig.finance.min} 
+                                max={riskLikelihoodImpactConfig.finance.max}
+                                step={riskLikelihoodImpactConfig.finance.step}
+                            />
+                            <p>{(riskItem && riskItem.financeScore) 
+                                    ? riskItem.financeScore.unmitigated.description
+                                    : riskLikelihoodImpactConfig.finance[1].description}
+                            </p>
+                        </div>
                     </div>
+
+                    <h6 htmlFor='mitigated'>Mitigated Finance</h6>
                     <div className='form-floating mb-3'>
-                        <select className='form-select' id='mitigated' required
-                            disabled={false}
-                            {...register('mitigated', { required: true })}>
-                            <option value=''>Choose...</option>
-                            <option value='1'>{riskLikelihoodImpactConfig.finance[1].description}</option>
-                            <option value='2'>{riskLikelihoodImpactConfig.finance[2].description}</option>
-                            <option value='3'>{riskLikelihoodImpactConfig.finance[3].description}</option>
-                            <option value='4'>{riskLikelihoodImpactConfig.finance[4].description}</option>
-                            <option value='5'>{riskLikelihoodImpactConfig.finance[5].description}</option>
-                            <option value='6'>{riskLikelihoodImpactConfig.finance[6].description}</option>
-                        </select>
-                        <label htmlFor='mitigated'>Mitigated Likelihood</label>
+                        <div className='range'>
+                            <input
+                                type="range" 
+                                {...register('mitigated')}
+                                min={riskLikelihoodImpactConfig.finance.min} 
+                                max={riskLikelihoodImpactConfig.finance.max}
+                                step={riskLikelihoodImpactConfig.finance.step}
+                            />
+                            <p>{(riskItem && riskItem.financeScore)
+                                    ? riskItem.financeScore.mitigated.description
+                                    : riskLikelihoodImpactConfig.finance[1].description}</p>
+                        </div>
                     </div>
                 </div>
-                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} />
+                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} delay={250} />
             </form>
         </FormProvider>
         

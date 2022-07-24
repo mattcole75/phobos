@@ -30,7 +30,7 @@ const RiskHeader = (props) => {
     const [submittedData, setSubmittedData] = useState({});
 
     const onSubmit = async (data) => {
-        save({ ...data, keyWords: await getKeyWords(data.description) });
+        save({ ...data, keyWords: await getKeyWords(data.description) }, 'PATCH_RISK_ITEM');
         setSubmittedData({ ...data, keyWords: await getKeyWords(data.description) });
     };
 
@@ -54,7 +54,7 @@ const RiskHeader = (props) => {
         <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3 border-bottom">
-                    <h2 className="text-start">Risk details: { formStatus ? <div className={formStatusStyle}>{formStatus}</div> : null }</h2>
+                    <h2 className="text-start">Risk Details: { formStatus ? <div className={formStatusStyle}>{formStatus}</div> : null }</h2>
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" id="title" placeholder="Title" autoComplete="off" required minLength={3} maxLength={32}
                             disabled={false}
@@ -68,7 +68,7 @@ const RiskHeader = (props) => {
                         <label htmlFor="description" className="form-label">Description</label>
                     </div>
                 </div>
-                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} />
+                <Autosave defaultValues={defaultValues} onSubmit={onSubmit} delay={2000} />
             </form>
         </FormProvider>
     );

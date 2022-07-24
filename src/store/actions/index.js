@@ -15,37 +15,12 @@ export {
 } from './auth';
 
 export {
-    feedbackSendRequest,
-    feedbackStateReset,
-    feedbackErrorReset,
-    feedbackRedirectPath
-} from './feedback';
-
-export {
-    intelliVerseSendRequest,
-    intelliVerseStateReset,
-    intelliVerseErrorReset,
-    intelliVerseRedirectPath
-} from './intelliVerse';
-
-export {
     riskSendRequest,
     riskItemSelect,
+    riskControlMeasureItemSelect,
+    riskPotencialSourceItemSelect,
+    riskRecoveryItemSelect,
     riskStateReset,
     riskErrorReset,
     riskRedirectPath
 } from './risk';
-
-export {
-    organisationSendRequest,
-    organisationStateReset,
-    organisationErrorReset,
-    organisationRedirectPath
-} from './organisation';
-
-export {
-    locationSendRequest,
-    locationStateReset,
-    locationErrorReset,
-    locationRedirectPath
-} from './location';
